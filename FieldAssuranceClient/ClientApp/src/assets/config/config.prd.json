@@ -1,0 +1,10 @@
+{
+	"env": {
+	"name": "PROD"
+},
+  "ConnectionStrings": {
+    "apiServer": "https://api.cryolife.com/",
+    "apiAuthServer": "https://auth.cryolife.com/",
+    "timeout": 3600000
+  }
+}

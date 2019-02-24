@@ -1,0 +1,13 @@
+.panel-subheading {
+  display: block;
+  text-align: right;
+  color: white;
+  font-weight: 400;
+  margin-top: 5px;
+}
+
+@media (max-width: 768px){
+  .panel-subheading {
+    margin-top: 0px;
+  }
+}

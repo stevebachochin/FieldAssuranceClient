@@ -1,0 +1,44 @@
+<div class="vertical-center-flex">
+  <div class="loader-overlay" *ngIf="!resourceLoaded">
+    <div>
+      <mat-progress-bar style="margin:0 auto;" mode="indeterminate"></mat-progress-bar>
+    </div>
+  </div>
+  <div class="login-container center-block">
+    <div class="panel panel-primary boxshadow">
+      <div class="panel-heading">
+        <span class="glyphicon glyphicon-lock"></span> {{langData?.LoginSubmit}}
+        <button *ngIf="isModal" type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="panel-body" *ngIf="resourceLoaded">
+        <div class="form-group has-feedback">
+          <label class="msg col-md-12" for="login-email">{{authMsg}}</label>
+        </div>
+        <div class="col-md-8 col-md-offset-2">
+          <form class="form-horizontal login" name="loginForm" #loginForm="ngForm" novalidate (ngSubmit)="login()">
+            <div class="form-group has-feedback">
+              <label class="control-label col-md-2" for="login-email">{{langData?.LoginUserName}}</label>
+              <div class="col-md-10">
+                <input type="text" id="login-username" name="username" placeholder="Enter username" class="form-control" [(ngModel)]="userLogin.username" #username="ngModel" required />
+              </div>
+            </div>
+
+            <div class="form-group has-feedback">
+              <label class="control-label col-md-2" for="login-password">{{langData?.LoginPassword}}</label>
+              <div class="col-md-10">
+                <input type="password" id="login-password" name="password" placeholder="Enter password" class="form-control" [(ngModel)]="userLogin.password" #password="ngModel" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-offset-2 col-md-10">
+                <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">{{langData?.LoginSubmit}}</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

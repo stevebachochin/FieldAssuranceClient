@@ -1,0 +1,85 @@
+<div id="summary" class="section panel panel-primary">
+  <div class="loader-overlay">
+    <div class="panel-heading"> Field Assurance Forms Summary</div>
+    <div class="loader-overlay" *ngIf="resourceLoaded">
+      <div>
+        <mat-progress-bar style="margin:0 auto;" mode="indeterminate"></mat-progress-bar>
+      </div>
+    </div>
+    <div class="panel-srch">
+      <div class="col-sm-5 column">
+        <div class="col-sm-6 fmlabelright">Search Field Name</div>
+        <div class="col-sm-6 fld">
+          <select [(ngModel)]="querySearchName">
+            <option value="CName">Complaintant</option>
+            <option value="Product">Product</option>
+            <option value="RMANumber">RMA #</option>
+            <option value="FacName">Facility/Hospital</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-sm-4 column">
+        <div class="col-sm-4 fmlabelright">Search Text</div>
+        <div class="col-sm-8 fld"><input [(ngModel)]="querySearch" placeholder="enter search text" (keyup.enter)="searchForms(querySearchName, querySearch)" required></div>
+      </div>
+
+
+      <div class="col-sm-3 column">
+        <div class="col-sm-6 hdr buttton"><button type="button" (click)="searchForms(querySearchName, querySearch)" [disabled]="querySearch===''" class="btn btn-default"><span class='glyphicon glyphicon-ok-circle'></span>Search</button></div>
+        <div class="col-sm-6 hdr buttton"><button type="button" (click)="clearSearch()" class="btn btn-default"><span class='glyphicon glyphicon-ok-circle'></span>Clear</button></div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <table mat-table matSortActive="CName" matSortDirection="asc" matSortDisableClear class="datatable" [dataSource]="(dataSource|async)" matSort>
+        <tr>
+          <ng-container matColumnDef="CName">
+            <th *matHeaderCellDef mat-sort-header>Complainant</th>
+            <td *matCellDef="let item"><a routerLink="/form/{{item.fldid}}">{{item.CName}}</a></td>
+          </ng-container>
+          <ng-container matColumnDef="Product">
+            <th *matHeaderCellDef mat-sort-header>Product</th>
+            <td *matCellDef="let item" (click)="onRowClicked(item)">{{item.Product}}</td>
+          </ng-container>
+          <ng-container matColumnDef="RMANumber">
+            <th *matHeaderCellDef mat-sort-header>RMA #</th>
+            <td *matCellDef="let item" (click)="onRowClicked(item)">{{item.RMANumber}}</td>
+          </ng-container>
+          <ng-container matColumnDef="FacName">
+            <th *matHeaderCellDef mat-sort-header>Facility/Hospital</th>
+            <td *matCellDef="let item" (click)="onRowClicked(item)">{{item.FacName}}</td>
+          </ng-container>
+          <ng-container matColumnDef="CryolifeRep">
+            <th *matHeaderCellDef>CryoLife Rep.</th>
+            <td *matCellDef="let item" (click)="onRowClicked(item)">{{item.CryolifeRep}}</td>
+          </ng-container>
+          <ng-container matColumnDef="RegionMgr">
+            <th *matHeaderCellDef>Region Mgr.</th>
+            <td *matCellDef="let item" (click)="onRowClicked(item)">{{item.RegionMgr}}</td>
+          </ng-container>
+          <ng-container matColumnDef="Created">
+            <th *matHeaderCellDef>Created</th>
+            <td *matCellDef="let item" (click)="onRowClicked(item)">{{item.Created | date:'MM/dd/yyyy'}}</td>
+          </ng-container>
+          <ng-container matColumnDef="DateReported">
+            <th *matHeaderCellDef>Date Reported</th>
+            <td *matCellDef="let item" (click)="onRowClicked(item)">{{item.DateReported | date:'MM/dd/yyyy'}}</td>
+          </ng-container>
+          <ng-container matColumnDef="DateIncident">
+            <th *matHeaderCellDef>Revision Date</th>
+            <td *matCellDef="let item" (click)="onRowClicked(item)">{{item.DateIncident | date:'MM/dd/yyyy'}}</td>
+          </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+
+        <tr class="datarow" mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+
+      </table>
+      <mat-paginator [length]="totalCount" [pageSize]="selectedPageSize"
+                     [pageSizeOptions]="[5, 10, 20]" (page)="paging($event)"></mat-paginator>
+
+    </div>
+  </div>
+  </div>

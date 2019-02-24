@@ -1,0 +1,10 @@
+{
+  "env": {
+    "name": "QAS"
+  },
+  "ConnectionStrings": {
+    "apiServer": "https://apiqas.cryolife.com/",
+    "apiAuthServer": "https://authqas.cryolife.com/",
+    "timeout": 1200000
+  }
+}
